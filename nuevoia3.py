@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import google.generativeai as genai
 import time
-import chardet
 
 # Initialize the Gemini API
 genai.configure(api_key=st.secrets["API_KEY_GENAI"])
@@ -24,7 +23,7 @@ st.title('📊 Generador EDA con IA')
 st.markdown("""
     ✅Esta aplicación permite subir archivos (CSV, JSON, XLSX) para realizar un análisis descriptivo.
     Obtendrás los primeros registros del dataset, podrás elegir la hoja a trabajar (si aplica)
-    y recibir recomendaciones a partir de un análisis exploratorio de datos (EDA). Comienza subiendo tu archivo en el selector de archivos!
+    y recibir recomendaciones a partir de un análisis exploratorio de datos (EDA). Comienza subiendo tu archivo en el selector de
 """, unsafe_allow_html=True)
 
 # Componentes clave de EDA
@@ -84,26 +83,15 @@ if uploaded_file is not None:
     if uploaded_file.size > 200 * 1024 * 1024:  # 200 MB en bytes
         st.sidebar.error("El archivo es demasiado grande. No se permite el ingreso de archivos mayores a 200 MB.")
     else:
-        try:
-            with st.spinner('Cargando y analizando el archivo...'):
-                time.sleep(1)  # Simula un pequeño retraso para visualizar el spinner.
+        with st.spinner('Cargando y analizando el archivo...'):
+            time.sleep(1)  # Simula un pequeño retraso para visualizar el spinner.
 
-                # Cargar los datos según el tipo de archivo
+            # Cargar los datos según el tipo de archivo
+            try:
                 if uploaded_file.type == "text/csv":
-                    # Leer los primeros 100000 bytes del archivo para detectar la codificación
-                    rawdata = uploaded_file.read(100000)
-                    result = chardet.detect(rawdata)
-                    encoding = result['encoding']
-    
-                    # Reiniciar el puntero del archivo para leerlo de nuevo
-                    uploaded_file.seek(0)  # Reinicia el archivo para leerlo desde el principio
-
-                    # Cargar el CSV con la codificación detectada
-                    data = pd.read_csv(uploaded_file, encoding=encoding)
-
+                    data = pd.read_csv(uploaded_file)
                 elif uploaded_file.type == "application/json":
                     data = pd.read_json(uploaded_file)
-
                 elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
                     xls = pd.ExcelFile(uploaded_file)
                     sheet_names = xls.sheet_names
@@ -152,5 +140,5 @@ if uploaded_file is not None:
                 st.subheader("Recomendaciones obtenidas de la IA:")
                 st.write(recomendaciones)
 
-        except Exception as e:
-            st.error(f"Ocurrió un error al cargar el archivo: {e}")
+            except Exception as e:
+                st.error(f"Ocurrió un error al cargar el archivo: {e}")
