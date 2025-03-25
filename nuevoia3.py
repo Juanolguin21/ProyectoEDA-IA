@@ -51,7 +51,7 @@ st.sidebar.markdown('<h2 style="color: blue;"> 📁 Selector de Archivos</h2>', 
 st.sidebar.image('https://www.gaceta.unam.mx/wp-content/uploads/2020/08/200820-aca1-des-f1-Ciencia-de-Datos.jpg', caption='Ciencia de Datos', use_container_width=True)
 
 # Verificar el tamaño del archivo con una clave única
-uploaded_file = st.sidebar.file_uploader("⏫Sube tu archivo (CSV, JSON, XLSX)", type=["csv", "json", "xlsx"], key="file_uploader_1")
+uploaded_file = st.sidebar.file_uploader("⏫Sube tu archivo (CSV, JSON, XLSX) (atencion, no se permite CSV UTF-8)", type=["csv", "json", "xlsx"], key="file_uploader_1")
 
 # Acerca de...
 st.sidebar.header('Creditos ✅')
