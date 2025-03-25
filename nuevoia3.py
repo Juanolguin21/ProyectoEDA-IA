@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import google.generativeai as genai
 import time
+import chardet
 
 # Initialize the Gemini API
 genai.configure(api_key=st.secrets["API_KEY_GENAI"])
