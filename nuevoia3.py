@@ -23,7 +23,7 @@ st.title('📊 Generador EDA con IA')
 st.markdown("""
     ✅Esta aplicación permite subir archivos (CSV, JSON, XLSX) para realizar un análisis descriptivo.
     Obtendrás los primeros registros del dataset, podrás elegir la hoja a trabajar (si aplica)
-    y recibir recomendaciones a partir de un análisis exploratorio de datos (EDA).
+    y recibir recomendaciones a partir de un análisis exploratorio de datos (EDA). Comienza subiendo tu archivo en el selector de archivos!
 """, unsafe_allow_html=True)
 
 # Componentes clave de EDA
