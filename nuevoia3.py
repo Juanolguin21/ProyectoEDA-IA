@@ -23,7 +23,7 @@ st.title('📊 Generador EDA con IA')
 st.markdown("""
     ✅Esta aplicación permite subir archivos (CSV, JSON, XLSX) para realizar un análisis descriptivo.
     Obtendrás los primeros registros del dataset, podrás elegir la hoja a trabajar (si aplica)
-    y recibir recomendaciones a partir de un análisis exploratorio de datos (EDA). Comienza subiendo tu archivo en el selector de
+    y recibir recomendaciones a partir de un análisis exploratorio de datos (EDA). Comienza subiendo tu archivo en el selector
 """, unsafe_allow_html=True)
 
 # Componentes clave de EDA
@@ -89,7 +89,7 @@ if uploaded_file is not None:
             # Cargar los datos según el tipo de archivo
             try:
                 if uploaded_file.type == "text/csv":
-                    data = pd.read_csv(uploaded_file)
+                    data = pd.read_csv(uploaded_file, dtype={'columna1': str, 'columna2': float})
                 elif uploaded_file.type == "application/json":
                     data = pd.read_json(uploaded_file)
                 elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
